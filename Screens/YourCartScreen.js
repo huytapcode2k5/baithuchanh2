@@ -34,7 +34,7 @@ export default function YourCartScreen({ navigation }) {
             brand: "Marley's",
             price: 1249,
             qty: 1,
-            image: require("../Ảnh/Rectangle 45.png")
+            image: require("../Ảnh/Mockup.png")
         }
     ]);
 

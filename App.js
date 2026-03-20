@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { FontAwesome5 } from '@expo/vector-icons'
+import { View, Image } from 'react-native'
 
 // Import Screens
 import HomeScreen from './Screens/HomeScreen'
@@ -18,43 +18,66 @@ function MainTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
+        tabBarIcon: ({ focused }) => {
 
-          let iconName
+          let iconSource
 
           if (route.name === "Home") {
-            iconName = "home"
-          }
-          else if (route.name === "Scan") {
-            iconName = "camera"
-          }
-          else if (route.name === "Cart") {
-            iconName = "shopping-cart"
+            iconSource = require("./Ảnh/Group 152.png")
+          } else if (route.name === "Notification") {
+            iconSource = require("./Ảnh/Group 153.png")
+          } else if (route.name === "Scan") {
+            iconSource = require("./Ảnh/Vector.png")
+          } else if (route.name === "History") {
+            iconSource = require("./Ảnh/Group 154.png")
+          } else if (route.name === "Cart") {
+            iconSource = require("./Ảnh/Card Icon.png")
           }
 
-          return <FontAwesome5 name={iconName} size={size} color={color} />
+          const isMiddle = route.name === "Scan"
+
+          return (
+            <View style={{
+              backgroundColor: focused && !isMiddle ? "#ddeeff" : "transparent",
+              borderRadius: 12,
+              padding: isMiddle ? 0 : 8,
+              alignItems: "center",
+              justifyContent: "center",
+            }}>
+              <Image
+                source={iconSource}
+                style={{
+                  width: isMiddle ? 28 : 22,
+                  height: isMiddle ? 28 : 22,
+                  resizeMode: "contain",
+                  tintColor: focused ? "#4a90d9" : "#aaaaaa",
+                }}
+              />
+            </View>
+          )
         },
 
-        tabBarActiveTintColor: "orange",
-        tabBarInactiveTintColor: "gray",
-        headerShown: false
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: "#ffffff",
+          borderTopWidth: 0,
+          elevation: 10,
+          shadowColor: "#000",
+          shadowOpacity: 0.08,
+          shadowRadius: 10,
+          height: 65,
+          paddingBottom: 10,
+          paddingTop: 8,
+        }
       })}
     >
 
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-      />
-
-      <Tab.Screen
-        name="Scan"
-        component={ScanScreen}
-      />
-
-      <Tab.Screen
-        name="Cart"
-        component={YourCartScreen}
-      />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Notification" component={HomeScreen} />
+      <Tab.Screen name="Scan" component={ScanScreen} />
+      <Tab.Screen name="History" component={HomeScreen} />
+      <Tab.Screen name="Cart" component={YourCartScreen} />
 
     </Tab.Navigator>
   )

@@ -9,7 +9,7 @@ export default function PaymentSuccess({ navigation }) {
             {/* Back button */}
             <TouchableOpacity
                 style={styles.backBtn}
-                onPress={() => navigation.navigate("Home")}
+                onPress={() => navigation.goBack()}
             >
                 <Ionicons name="arrow-back-circle" size={40} color="#5567e9" />
             </TouchableOpacity>
